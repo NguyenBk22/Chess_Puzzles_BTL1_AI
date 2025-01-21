@@ -54,12 +54,6 @@ class Board:
         x, y = self.convert_valid_position(pos)
         self.board[x][y] = None
 
-    def is_valid_move(self, piece, new_position):
-        if new_position == None:
-            return False
-        else:
-            return True
-        
     def count_NumberOfPieces(self):
         cnt = 0
         for i in range(8):

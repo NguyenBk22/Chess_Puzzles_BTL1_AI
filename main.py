@@ -9,7 +9,7 @@ def main():
     game.setup_boardgame(positions)
 
     while not game.is_win():
-        #Logic xử lý
+        #Logic xử lý giải thuật tìm kiếm
         pass
 
 if __name__ == "__main__":
