@@ -37,16 +37,16 @@ class Board:
             return "This is invalid position"
         return x, y
     
-    def place_piece(self, piece, pos):
+    def place_piece(self, piece_name, pos):
         x, y = self.convert_valid_position(pos)
-        pos[0] = x
-        pos[1] = y
+        # Kiểm tra x, y có nằm trong phạm vi bàn cờ
+        if not (0 <= x < 8 and 0 <= y < 8):
+            return "Position out of bounds"
         
-        self.board[x][y] = piece
-        piece_upper = piece.upper()
+        piece_upper = piece_name.upper()
         
         if piece_upper in self.piece:
-            self.board[x][y] = self.piece[piece_upper](pos)
+            self.board[x][y] = self.piece[piece_upper]([x, y])
         else:
             return "Invalid Piece"
 
@@ -54,6 +54,12 @@ class Board:
         x, y = self.convert_valid_position(pos)
         self.board[x][y] = None
 
+    def is_valid_move(self, piece, new_position):
+        if new_position == None:
+            return False
+        else:
+            return True
+        
     def count_NumberOfPieces(self):
         cnt = 0
         for i in range(8):

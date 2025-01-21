@@ -5,8 +5,8 @@ class ChessGame:
         self.board = Board()
 
     def setup_boardgame(self, positions):
-        for piece, pos in positions:
-            self.board.place_piece(piece, pos)
+        for piece_name, pos in positions:
+            self.board.place_piece(piece_name, pos)
 
     def is_win(self):
         numberofpieces = self.board.count_NumberOfPieces()
