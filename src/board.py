@@ -1,4 +1,4 @@
-from pieces import King, Knight, Queen, Pawn, Rook, Bishop
+from src.pieces import King, Knight, Queen, Pawn, Rook, Bishop
 
 class Board:
     def __init__(self):
@@ -14,8 +14,15 @@ class Board:
         for i in range(8):
             self.board.append([None] * 8) # 8 columns each row
 
+    def __str__(self):
+        # Chuyển trạng thái bàn cờ thành một chuỗi dễ đọc
+        board_rep = ""
+        for row in self.board:
+            board_rep += " ".join([str(cell) if cell else "." for cell in row]) + "\n"
+        return board_rep
+    
     def convert_valid_position(self, pos):
-        x = 8 - pos[1]
+        x = 8 - int(pos[1])
         y = pos[0]
         if y == 'a':
             y = 0

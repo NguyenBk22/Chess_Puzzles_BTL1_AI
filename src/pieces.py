@@ -5,11 +5,14 @@ class Pieces:
         self.position = position
 
     @abstractmethod
-    def capture(self, board):
+    def get_valid_moves(self, board):
         pass
 
 class King(Pieces):
-    def capture(self, board):
+    def __str__(self):
+        return "♔"
+    
+    def get_valid_moves(self, board):
         valid_moves = []
         x = self.position[0]
         y = self.position[1]
@@ -49,7 +52,10 @@ class King(Pieces):
         return valid_moves
             
 class Queen(Pieces):
-    def capture(self, board):
+    def __str__(self):
+        return "♕"
+    
+    def get_valid_moves(self, board):
         valid_moves = []
         x = self.position[0]
         y = self.position[1]
@@ -122,7 +128,10 @@ class Queen(Pieces):
         return valid_moves
             
 class Knight(Pieces):
-    def capture(self, board):
+    def __str__(self):
+        return "♞"
+    
+    def get_valid_moves(self, board):
         valid_moves = []
         x = self.position[0]
         y = self.position[1]
@@ -144,7 +153,10 @@ class Knight(Pieces):
         return valid_moves
 
 class Rook(Pieces):
-    def capture(self, board):
+    def __str__(self):
+        return "♖"
+    
+    def get_valid_moves(self, board):
         valid_moves = []
         x = self.position[0]
         y = self.position[1]
@@ -176,7 +188,10 @@ class Rook(Pieces):
         return valid_moves
 
 class Pawn(Pieces):
-    def capture(self, board):
+    def __str__(self):
+        return "♙"
+    
+    def get_valid_moves(self, board):
         valid_moves = []
         x = self.position[0]
         y = self.position[1]
@@ -189,7 +204,10 @@ class Pawn(Pieces):
         return valid_moves
 
 class Bishop(Pieces):
-    def capture(self, board):
+    def __str__(self):
+        return "♗"
+    
+    def get_valid_moves(self, board):
         valid_moves = []
         x = self.position[0]
         y = self.position[1]

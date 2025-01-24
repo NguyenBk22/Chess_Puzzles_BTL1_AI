@@ -1,5 +1,5 @@
 
-def load_initial_position(self, filename):
+def load_initial_position(filename):
     positions = []
 
     with open(filename, 'r') as f:

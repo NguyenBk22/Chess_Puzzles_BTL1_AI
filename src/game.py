@@ -1,4 +1,4 @@
-from board import Board
+from src.board import Board
 
 class ChessGame:
     def __init__(self):
@@ -7,6 +7,8 @@ class ChessGame:
     def setup_boardgame(self, positions):
         for piece_name, pos in positions:
             self.board.place_piece(piece_name, pos)
+        
+        return self.board
 
     def is_win(self):
         numberofpieces = self.board.count_NumberOfPieces()
