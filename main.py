@@ -5,7 +5,7 @@ from src.searching_algorithms.Hill_Climbing import hill_climbing
 import copy
 
 def main():
-    input_file = "C:\\Python\\Chess_puzzles\\data\\input2.txt"
+    input_file = "C:\\Python\\Chess_puzzles\\data\\input1.txt"
     positions = load_initial_position(input_file)
 
     game = ChessGame()
@@ -22,6 +22,7 @@ def main():
 
     # Thực hiện BrFS
     brfs_result = brfs(game_copy1)
+    print(brfs_result)
 
     # Thực hiện Hill Climbing
     # hill_climbing_result = hill_climbing(game_copy2)

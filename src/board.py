@@ -82,6 +82,24 @@ class Board:
         return valid_moves
     
     def update_board(self, move):
-        x_old, y_old, x_new, y_new = move[0], move[1], move[2], move[3]
-        self.board[x_new][y_new] = self.board[x_old][y_old]
+        x_old, y_old, x_new, y_new = move
+        
+        # Lấy quân cờ đang di chuyển
+        moving_piece = self.board[x_old][y_old]
+        
+        if moving_piece is None:
+            raise ValueError("Invalid move: No piece at the starting position")
+
+        # Nếu vị trí mới có quân cờ, kiểm tra và xử lý ăn quân
+        captured_piece = self.board[x_new][y_new]
+        if captured_piece is not None:
+            print(f"{moving_piece} captures {captured_piece} at ({x_new}, {y_new})")
+        
+        # Di chuyển quân cờ
+        self.board[x_new][y_new] = moving_piece
         self.board[x_old][y_old] = None
+        
+        # Cập nhật vị trí của quân cờ
+        self.board[x_new][y_new].position = [x_new, y_new]
+
+
