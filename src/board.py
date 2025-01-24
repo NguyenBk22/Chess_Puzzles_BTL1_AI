@@ -65,7 +65,7 @@ class Board:
         cnt = 0
         for i in range(8):
             for j in range(8):
-                if self.board[i][j] != None:
+                if self.board[i][j] is not None:
                     cnt += 1
         return cnt
     
@@ -73,10 +73,15 @@ class Board:
         valid_moves = []
         for i in range(8):
             for j in range(8):
-                if self.board[i][j] != None:
+                if self.board[i][j] is not None:
                     piece = self.board[i][j]
                     moves = piece.get_valid_moves(self.board)
                     for move in moves:
                         valid_moves.append((i, j, move[0], move[1]))  # (from_x, from_y, to_x, to_y)
 
         return valid_moves
+    
+    def update_board(self, move):
+        x_old, y_old, x_new, y_new = move[0], move[1], move[2], move[3]
+        self.board[x_new][y_new] = self.board[x_old][y_old]
+        self.board[x_old][y_old] = None
