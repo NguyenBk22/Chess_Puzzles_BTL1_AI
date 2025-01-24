@@ -10,7 +10,7 @@ class Pieces:
 
 class King(Pieces):
     def __str__(self):
-        return "♔"
+        return "K"
     
     def get_valid_moves(self, board):
         valid_moves = []
@@ -53,7 +53,7 @@ class King(Pieces):
             
 class Queen(Pieces):
     def __str__(self):
-        return "♕"
+        return "Q"
     
     def get_valid_moves(self, board):
         valid_moves = []
@@ -129,7 +129,7 @@ class Queen(Pieces):
             
 class Knight(Pieces):
     def __str__(self):
-        return "♞"
+        return "N"
     
     def get_valid_moves(self, board):
         valid_moves = []
@@ -154,7 +154,7 @@ class Knight(Pieces):
 
 class Rook(Pieces):
     def __str__(self):
-        return "♖"
+        return "R"
     
     def get_valid_moves(self, board):
         valid_moves = []
@@ -189,7 +189,7 @@ class Rook(Pieces):
 
 class Pawn(Pieces):
     def __str__(self):
-        return "♙"
+        return "P"
     
     def get_valid_moves(self, board):
         valid_moves = []
@@ -205,7 +205,7 @@ class Pawn(Pieces):
 
 class Bishop(Pieces):
     def __str__(self):
-        return "♗"
+        return "B"
     
     def get_valid_moves(self, board):
         valid_moves = []

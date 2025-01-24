@@ -22,3 +22,7 @@ Bước 3: Hiện thực giải thuật DFS/BrFS.
 Bước 4: Hiện thực giải thuật A* hoặc Hill Climbing.
 Bước 5: Tạo bảng so sánh thời gian và bộ nhớ tiêu tốn giữa hai giải thuật với các bài toán khác nhau.
 Bước 6: Viết báo cáo và tạo video minh họa.
+
+---
+self.chess_board trong ChessGame là một đối tượng của lớp Board, dùng để quản lý bàn cờ.
+self.board trong Board là một mảng 2D, chứa các quân cờ hoặc None (trống).

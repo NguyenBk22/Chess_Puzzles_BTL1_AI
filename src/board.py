@@ -60,12 +60,6 @@ class Board:
     def remove_piece(self, pos):
         x, y = self.convert_valid_position(pos)
         self.board[x][y] = None
-
-    def is_valid_move(self, piece, new_position):
-        if new_position == None:
-            return False
-        else:
-            return True
         
     def count_NumberOfPieces(self):
         cnt = 0
@@ -74,3 +68,15 @@ class Board:
                 if self.board[i][j] != None:
                     cnt += 1
         return cnt
+    
+    def get_board_valid_moves(self):
+        valid_moves = []
+        for i in range(8):
+            for j in range(8):
+                if self.board[i][j] != None:
+                    piece = self.board[i][j]
+                    moves = piece.get_valid_moves(self.board)
+                    for move in moves:
+                        valid_moves.append((i, j, move[0], move[1]))  # (from_x, from_y, to_x, to_y)
+
+        return valid_moves
