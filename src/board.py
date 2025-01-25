@@ -89,11 +89,6 @@ class Board:
         
         if moving_piece is None:
             raise ValueError("Invalid move: No piece at the starting position")
-
-        # Nếu vị trí mới có quân cờ, kiểm tra và xử lý ăn quân
-        captured_piece = self.board[x_new][y_new]
-        if captured_piece is not None:
-            print(f"{moving_piece} captures {captured_piece} at ({x_new}, {y_new})")
         
         # Di chuyển quân cờ
         self.board[x_new][y_new] = moving_piece
