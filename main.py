@@ -1,11 +1,11 @@
 from src.game import ChessGame
 from src.utils import load_initial_position
 from src.searching_algorithms.BrFS import brfs
-from src.searching_algorithms.Hill_Climbing import hill_climbing
+from src.searching_algorithms.Best_First_Search import best_first_search
 import copy
 
 def main():
-    input_file = "C:\\Python\\Chess_puzzles\\data\\input4.txt"
+    input_file = "C:\\Python\\Chess_puzzles\\data\\input3.txt"
     positions = load_initial_position(input_file)
 
     game = ChessGame()
@@ -22,10 +22,11 @@ def main():
 
     # Thực hiện BrFS
     brfs_result = brfs(game_copy1)
-    print("---------- Result ---------- \n", brfs_result, "\n")
+    print("---------- Result of BrFS Algorithm ---------- \n", brfs_result, "\n")
 
-    # Thực hiện Hill Climbing
-    # hill_climbing_result = hill_climbing(game_copy2)
+    # Thực hiện Best First Search
+    best_first_search_result = best_first_search(game_copy2)
+    print("---------- Result of Best First Search Algorithm ---------- \n", best_first_search_result, "\n")
 
 if __name__ == "__main__":
     main()

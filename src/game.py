@@ -7,6 +7,10 @@ class ChessGame:
         self.parent = None  # Lưu trạng thái cha
         self.move = None    # Lưu nước đi dẫn tới trạng thái này
 
+    def __lt__(self, other):
+        # So sánh dựa trên một thuộc tính nào đó, ví dụ như số quân cờ còn lại
+        return self.chess_board.count_NumberOfPieces() < other.chess_board.count_NumberOfPieces()
+
     def setup_boardgame(self, positions):
         for piece_name, pos in positions:
             self.chess_board.place_piece(piece_name, pos)
