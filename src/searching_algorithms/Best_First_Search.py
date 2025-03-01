@@ -4,12 +4,13 @@ def best_first_search(game):
     open_set = []
     heapq.heappush(open_set, (heuristic(game), game))
     f_score = {game:heuristic(game)}
+    visited = []
 
     while open_set:
         current_state = heapq.heappop(open_set)[1]
-
+        visited.append(current_state)
         if current_state.is_goal_state():
-            return extract_path(current_state)
+            return (extract_path(current_state), visited)
         
         next_states = current_state.generate_next_states()
 
@@ -18,7 +19,7 @@ def best_first_search(game):
                 f_score[next_state] = heuristic(next_state)
                 if next_state not in [i[1] for i in open_set]:
                     heapq.heappush(open_set, (f_score[next_state], next_state))
-    return None
+    return ([], [])
 
 def heuristic(game):
     return game.chess_board.count_NumberOfPieces() - 1

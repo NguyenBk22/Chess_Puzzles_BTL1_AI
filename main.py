@@ -5,7 +5,7 @@ from src.searching_algorithms.Best_First_Search import best_first_search
 import copy
 
 def main():
-    input_file = "C:\\Python\\Chess_puzzles\\data\\input3.txt"
+    input_file = "data\\input3.txt"
     positions = load_initial_position(input_file)
 
     game = ChessGame()

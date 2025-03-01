@@ -2,15 +2,15 @@ from collections import deque
 
 def brfs(game):
     queue = deque([game])
-    visited = set()
+    visited = []
 
     while queue:
         current_state = queue.popleft()
-
+        visited.append(current_state)
         if current_state.is_goal_state():
-            return extract_path(current_state)
+            return (extract_path(current_state), visited)
     
-        visited.add(current_state)
+        
 
         next_states = current_state.generate_next_states()
 
@@ -18,7 +18,7 @@ def brfs(game):
             if state not in visited and state not in queue:
                 queue.append(state)
 
-    return None
+    return ([], [])
 
 def extract_path(goal_state):
     path = []

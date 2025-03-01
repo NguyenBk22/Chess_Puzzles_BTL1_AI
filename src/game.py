@@ -1,4 +1,6 @@
 from src.board import Board
+#from board import Board
+
 import copy
 
 class ChessGame:

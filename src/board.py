@@ -82,6 +82,7 @@ class Board:
         return valid_moves
     
     def update_board(self, move):
+
         x_old, y_old, x_new, y_new = move
         
         # Lấy quân cờ đang di chuyển
