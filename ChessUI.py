@@ -51,7 +51,7 @@ def generate_random_chess_input(filename="data/input_random.txt"):
         board_positions.clear()
         notation_list.clear()
 
-        num_pieces = random.randint(5, MAX_PIECES)
+        num_pieces = random.randint(2, MAX_PIECES)
         
         for _ in range(num_pieces):
             piece = random.choice(pieces)  # Pick a random piece
@@ -107,8 +107,7 @@ piece_map = {
 }
 
 class ChessPygame:
-    def __init__(self, filename="data\\input_random.txt"):
-        self.game = ChessGame()
+    def __init__(self, filename = "data\\input_random.txt"):
         if filename == "data\\input_random.txt":
             new_game_filename = generate_random_chess_input()
             self.load_game(new_game_filename)
@@ -132,12 +131,21 @@ class ChessPygame:
         
     def load_game(self, filename):
         """Load a new chess game from file."""
-        
         self.input = filename
         self.initial_positions = load_initial_position(filename)
+        self.game = ChessGame()
         self.game.setup_boardgame(self.initial_positions)
+        
         self.solution_moves = []
         self.step_index = 0
+        
+        self.brfs_visited = []
+        self.brfs_index = 0
+        self.brfs = False
+        
+        self.bfs_visited = []
+        self.bfs_index = 0
+        self.bfs = False
 
 
     def draw_board(self):
@@ -217,34 +225,11 @@ class ChessPygame:
         self.game = ChessGame()
         new_game_filename = generate_random_chess_input()
         self.load_game(new_game_filename)
-    
-        # Reset game attributes
-        self.solution_moves = []
-        self.step_index = 0
-        self.brfs_visited = []
-        self.brfs_index = 0
-        self.brfs = False
-        
-        self.bfs_visited = []
-        self.bfs_index = 0
-        self.bfs = False
-            
-            
+                    
     def reset_game(self):
         """Reset the game to its initial state."""
         self.load_game(self.input)
         
-        # Reset game attributes
-        self.solution_moves = []
-        self.step_index = 0
-        
-        self.brfs_visited = []
-        self.brfs_index = 0
-        self.brfs = False
-            
-        self.bfs_visited = []
-        self.bfs_index = 0
-        self.bfs = False
             
 
     def solve_by_bfs(self):
@@ -256,7 +241,6 @@ class ChessPygame:
         self.bfs = True
         
         if self.solution_moves == []:
-            print ("No solution found.")
             self.show_popup_message("No solution found.")
             return 
         self.animate_solution_moves() 
@@ -271,12 +255,25 @@ class ChessPygame:
         
         if self.bfs_index < len(self.bfs_visited):
             
+            self.game = self.bfs_visited[self.bfs_index]
+            font = pygame.font.SysFont("Arial", 20)  # Ensure consistent font
+            # print parent
+            #if self.brfs_index:
+            #    if self.brfs_visited[self.brfs_index-1] != self.game.parent:
+            #        screen.fill(WHITE)
+            #        self.draw_board()
+            #        self.draw_pieces(self.game.parent)
+            #        self.draw_buttons(font)
+            #        pygame.display.flip()
+            #        pygame.time.delay(750)
+                    
+            self.brfs_index +=1
+            
+            
+            # print the next state
             screen.fill(WHITE)
             self.draw_board()
-            self.game = self.bfs_visited[self.bfs_index]
             self.draw_pieces(self.game)
-            self.bfs_index +=1
-            font = pygame.font.SysFont("Arial", 20)  # Ensure consistent font
             self.draw_buttons(font)
             pygame.display.flip()
             pygame.time.delay(500)
@@ -293,7 +290,7 @@ class ChessPygame:
         self.brfs = True
         
         if self.solution_moves == []:
-            print ("No solution found.")
+          
             self.show_popup_message("No solution found.")
             return 
         self.animate_solution_moves() 
@@ -307,15 +304,30 @@ class ChessPygame:
         
         if self.brfs_index < len(self.brfs_visited):
             
+            self.game = self.brfs_visited[self.brfs_index]
+            font = pygame.font.SysFont("Arial", 20)  # Ensure consistent fon
+            
+            # print parent
+            #if self.brfs_index:
+            #    if self.brfs_visited[self.brfs_index-1] != self.game.parent:
+            #        screen.fill(WHITE)
+            #        self.draw_board()
+            #        self.draw_pieces(self.game.parent)
+            #        self.draw_buttons(font)
+            #        pygame.display.flip()
+            #        pygame.time.delay(750)
+                    
+            self.brfs_index +=1
+            
+            
+            # print the next state
             screen.fill(WHITE)
             self.draw_board()
-            self.game = self.brfs_visited[self.brfs_index]
             self.draw_pieces(self.game)
-            self.brfs_index +=1
-            font = pygame.font.SysFont("Arial", 20)  # Ensure consistent font
             self.draw_buttons(font)
             pygame.display.flip()
             pygame.time.delay(500)
+            
         else:
             self.show_popup_message("No more steps available.")
 
@@ -367,31 +379,3 @@ class ChessPygame:
         pygame.display.flip()
         pygame.time.delay(500)  # Show pop-up for 2 seconds
     
-def main():
-    pygame.init()
-    font = pygame.font.SysFont("Arial", 20)
-    game = ChessPygame("data\\input1.txt")
-    running = True
-
-    while running:
-        screen.fill(WHITE)
-        game.draw_board()
-        game.draw_pieces(game.game)
-        button_rects, buttons = game.draw_buttons(font)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                x, y = event.pos
-                for rect, action in zip(button_rects, buttons):
-                    if rect.collidepoint(x, y):
-                        action[1]()  # Call the associated function
-
-        pygame.display.flip()
-
-    pygame.quit()
-
-if __name__ == "__main__":
-    main()

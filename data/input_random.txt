@@ -1,6 +1,6 @@
-Ng5
-Nc4
-Pb1
-Na5
-Qa3
-Qg3
+Qc3
+Pc2
+Nh2
+Kd3
+Na3
+Nc7

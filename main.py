@@ -1,32 +1,46 @@
+import pygame
 from src.game import ChessGame
 from src.utils import load_initial_position
+from ChessUI import ChessPygame
 from src.searching_algorithms.BrFS import brfs
 from src.searching_algorithms.Best_First_Search import best_first_search
-import copy
+
+BOARD_SIZE = 8
+CELL_SIZE = 80  # Each square size
+
+WHITE = (255, 255, 255)
+
+# Set up display
+WINDOW_WIDTH = BOARD_SIZE * CELL_SIZE + 250
+WINDOW_HEIGHT = BOARD_SIZE * CELL_SIZE + 50
+screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption("Chess Ranger")
 
 def main():
-    input_file = "data\\input3.txt"
-    positions = load_initial_position(input_file)
+    pygame.init()
+    font = pygame.font.SysFont("Arial", 20)
+    game = ChessPygame("data\\input1.txt")
+    running = True
 
-    game = ChessGame()
-    game.setup_boardgame(positions)
+    while running:
+        screen.fill(WHITE)
+        game.draw_board()
+        game.draw_pieces(game.game)
+        button_rects, buttons = game.draw_buttons(font)
 
-    #TEST
-    print("----------- Initial Board ---------- \n", game.chess_board, "\n")
-    # print(game.chess_board.board)
-    print("---------- Valid Moves ---------- \n", game.chess_board.get_board_valid_moves(), "\n")
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
-    # Khởi tạo nhiều đối tượng board
-    game_copy1 = copy.deepcopy(game)
-    game_copy2 = copy.deepcopy(game)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                for rect, action in zip(button_rects, buttons):
+                    if rect.collidepoint(x, y):
+                        action[1]()  # Call the associated function
 
-    # Thực hiện BrFS
-    brfs_result = brfs(game_copy1)
-    print("---------- Result of BrFS Algorithm ---------- \n", brfs_result, "\n")
+        pygame.display.flip()
 
-    # Thực hiện Best First Search
-    best_first_search_result = best_first_search(game_copy2)
-    print("---------- Result of Best First Search Algorithm ---------- \n", best_first_search_result, "\n")
+    pygame.quit()
 
 if __name__ == "__main__":
     main()
